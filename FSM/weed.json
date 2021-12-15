@@ -1,0 +1,198 @@
+{
+    "state_0" : {
+        "Response" : "Hello [NAME]! I am Mark. How are you ?",
+        "Next_State" : "state_1"
+    },
+
+    "state_1" : {
+        "Response" : "I can't complain. Did you read about the new restrictive law on cannabis in the US?",
+        "Next_State" : "state_2"
+    },
+
+    "state_2" : {
+        "Response" : "If they are serious then they'd have to convict every college student. LOL!!",
+        "Next_State" : "state_3"
+    },
+
+    "state_3" : {
+        "Response" : "By the way, are you for or against cannabis legalization?",
+        "Next_State" : { 
+            "for" : "state_5",
+            "against" : "state_7",
+            "neutral" : "state_4"
+        }
+    },
+
+    "state_4" : {
+        "Response" : "Ok. Ya its sometimes tough to make a stand. BTW, I just saw this news about this guy gaining sight thanks to gene editing!!!",
+        "Next_State" : "change:state_2"
+    },
+
+    "state_5"  : {
+        "Response" : "If I understood correctly [NAME], you're in favor of weed legalization, is that right",
+        "Next_State" : { 
+            "for" : "state_8",
+            "against" : "state_9"
+        }
+    },
+
+    "state_7"  : {
+        "Response" : "If i understood correctly [NAME], you are against weed legalization, right ?",
+        "Next_State" : { 
+            "for" : "state_9",
+            "against" : "state_10"
+        }
+    } ,
+
+    "state_8"  : {
+        "Response" : "Right. What would you say is the main reason why you're in favor ?",
+        "Next_State" : "state_11"
+    },
+
+    "state_9"  : {
+        "Response" : "Sorry, I misunderstood. Are you for or against weed legalization ?",
+        "Next_State" : { 
+            "for" : "state_8",
+            "against" : "state_10"
+        }
+    }, 
+    
+    "state_10"  : {
+        "Response" : "Right. what would you say is the main reason why you're against it ?",
+        "Next_State" : "state_14"
+    }, 
+
+    "state_11"  : {
+        "Response" : "Ok, so you're in favor of legalization because [P], did I get this right ?",
+        "Next_State" : { 
+            "yes" : "state_15",
+            "no" : "state_12"
+        }
+    },
+
+    "state_12"  : {
+        "Response" : "I'm sorry! Could you please rephrase your answer ? That is, the main reason why you're in favor ?",
+        "Next_State" : "state_11"
+    },
+
+    "state_13"  : {
+        "Response" : "I'm sorry! Could you please rephrase your answer ? That is, the main reason why you're against ?",
+        "Next_State" : "state_14"
+    },
+
+    "state_14"  : {
+        "Response" : "Ok, so you're against legalization because [P], did I get this right?",
+        "Next_State" : { 
+            "yes" : "state_16",
+            "no" : "state_13"
+        }
+    },
+
+    "state_15"  : {
+        "Response" : "Right... I'm wondering however [NAME], how does [P] allow you to conclude that weed should be legalized ?",
+        "Next_State" : "state_17"
+    },
+
+    "state_16"  : {
+        "Response" : "Right... I'm wondering however [NAME], how does [P] allow you to conclude that weed should not be legalized ?",
+        "Next_State" : "state_20"
+    },
+
+    "state_17"  : {
+        "Response" : "Ok, so if I'm not mistaken, [P] allows you to conclude that weed should be legalized because [Q], right ?",
+        "Next_State" : { 
+            "yes" : "state_21",
+            "no" : "state_18"
+        }
+    },
+
+    "state_18"  : {
+        "Response" : "Oh, I'm sorry for misunderstanding. Could you please rephrase what you've explained ? That is, how does [P] allow you to conclude that weed should be legalized ?",
+        "Next_State" : "state_17"
+    },
+
+    "state_19"  : {
+        "Response" : "Oh, I'm sorry for misunderstanding. Could you please rephrase what you've explained ? That is, how does [P] allow you to conclude that weed should not be legalized ?",
+        "Next_State" : "state_20"
+    },
+
+    "state_20"  : {
+        "Response" : "Ok, so if I'm not mistaken, [P] allows you to conclude that weed should be legalized because [Q], right ?",
+        "Next_State" : { 
+            "yes" : "state_22",
+            "no" : "state_19"
+        }
+    },
+
+    "state_21"  : {
+        "Response" : "Ok, so if I'm not mistaken, [P] allows you to conclude that weed should be legalized because [Q], right ?",
+        "Next_State" : { 
+            "yes" : "state_23",
+            "no" : "state_24"
+        }
+    },
+
+    "state_22"  : {
+        "Response" : "Interesting... Could you think of  a situation where [Q] would lead you to think that weed should actually be legalized ?",
+        "Next_State" : { 
+            "yes" : "state_26",
+            "no" : "state_25"
+        }
+    },
+
+    "state_23"  : {
+        "Response" : "I see... Does bringing this example to mind alter your confidence in the belief that weed should be legalized ?",
+        "Next_State" : { 
+            "yes" : "state_29",
+            "no" : "state_27"
+        }
+    },
+
+    "state_24"  : {
+        "Response" : "Well, no biggy, it's not an easy thing to do... I'm wondering though, would you say there is another, more fundamental reason why you're in favor ?",
+        "Next_State" : { 
+            "yes" : "state_8",
+            "no" : "state_29"
+        }
+    },
+
+    "state_25"  : {
+        "Response" : "Well, no biggy, it's not an easy thing to do... I'm wondering though, would you say there is another, more fundamental reason why you're against ?",
+        "Next_State" : { 
+            "yes" : "state_10",
+            "no" : "state_29"
+        }
+    },
+
+    "state_26"  : {
+        "Response" : "I see... Does bringing this example to mind alter your confidence that weed should not be legalized ?",
+        "Next_State" : { 
+            "yes" : "state_29",
+            "no" : "state_28"
+        }
+    },
+
+    "state_27"  : {
+        "Response" : "Alright... Would you say there Is another, more fundamental reason why you're in favor of weed legalization ?",
+        "Next_State" : { 
+            "yes" : "state_8",
+            "no" : "state_29"
+        }
+    },
+
+    "state_28"  : {
+        "Response" : "Alright... Would you say there Is another, more fundamental reason why you're in favor of weed legalization ?",
+        "Next_State" : { 
+            "yes" : "state_10",
+            "no" : "state_29"
+        }
+    },
+
+    "state_29"  : {
+        "Response" : "Right... Well, that sums it up, I think. Time's up on my side, I have to go. It was very nice to talk to you [NAME]! Have a great day !"
+    },
+
+    "state_diverging_statement" : {
+        "Response" : "Okay. Oh by the way, did you see yesterday's basketball match?"
+    }
+}

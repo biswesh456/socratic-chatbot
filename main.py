@@ -8,6 +8,7 @@ from scipy.special import softmax
 
 topics_list = ['weed', 'gene']
 log = []
+topic_changed = False
 
 class blenderBot:
     def __init__(self):
@@ -56,46 +57,59 @@ def detect_reason(response, prev_user_response, p, q):
     if '[P]' in response and '[Q]' not in response:
         if 'because' in prev_user_response:
             p = prev_user_response.split('because')[-1]
+            p = p.replace('!', '').replace('?', '')
             return p, '', response.replace('[P]', p).strip() 
         
         elif 'since' in prev_user_response:
             p = prev_user_response.split('since')[-1]
+            p = p.replace('!', '').replace('?', '')
             return p, '', response.replace('[P]', p).strip() 
 
         elif ' as ' in prev_user_response:
             p = prev_user_response.split(' as ')[-1]
+            p = p.replace('!', '').replace('?', '')
             return p, '', response.replace('[P]', p).strip() 
 
         elif 'that' in prev_user_response:
             p = prev_user_response.split('that')[-1]
+            p = p.replace('!', '').replace('?', '')
             return p, '', response.replace('[P]', p).strip() 
         else:
             p = prev_user_response
+            p = p.replace('!', '').replace('?', '')
             return p, '', response.replace('[P]', p).strip() 
 
     elif '[Q]' in response:
         if 'because' in prev_user_response:
             q = prev_user_response.split('because')[-1]
+            q = q.replace('!', '').replace('?', '')
             return p, q, response.replace('[P]', p).replace('[Q]', q).strip() 
         
         elif 'since' in prev_user_response:
             q = prev_user_response.split('since')[-1]
+            q = q.replace('!', '').replace('?', '')
             return p, q, response.replace('[P]', p).replace('[Q]', q).strip() 
 
         elif ' as ' in prev_user_response:
             q = prev_user_response.split(' as ')[-1]
+            q = q.replace('!', '').replace('?', '')
             return p, q, response.replace('[P]', p).replace('[Q]', q).strip() 
 
         elif 'that' in prev_user_response:
             q = prev_user_response.split('that')[-1]
+            q = q.replace('!', '').replace('?', '')
             return p, q, response.replace('[P]', p).replace('[Q]', q).strip() 
         else:
             q = prev_user_response
-            return p, q, response.replace('[P]', p).replace('[Q]', q).strip() 
+            return p, q, response.replace('[P]', p).replace('[Q]', q).strip()
+
+    else:
+        return p, q, response 
             
         
 
 def socratic_chatbot(current_topic, user_name, current_state='state_0'):
+    global topic_changed
     json_file = current_topic + '.json'
     
     with open('./FSM/'+json_file) as f:
@@ -118,10 +132,14 @@ def socratic_chatbot(current_topic, user_name, current_state='state_0'):
         print('Mark : ' + response)
         user_response = input(user_name + " : ")
 
+        log.append('Mark : ' + response)
+        log.append(user_name + ' : ' + user_response)
+
         if 'Next_State' in state:
             next_state = state['Next_State']
             if isinstance(next_state, str):
                 if "change" in next_state:
+                    topic_changed = True
                     current_state = next_state[7:]
                     
                     if current_topic == "weed":
@@ -143,7 +161,10 @@ def socratic_chatbot(current_topic, user_name, current_state='state_0'):
                         current_state = next_state["against"]
                     else:
                         if "neutral" in next_state:
-                            current_state = next_state["neutral"]
+                            if topic_changed == True:
+                                current_state = next_state[current_belief[1]]
+                            else:    
+                                current_state = next_state["neutral"]
                         else:
                             current_state = next_state[current_belief[1]]
 
@@ -176,6 +197,9 @@ def normal_chatbot(current_topic, user_name, current_state='state_0'):
         print('Mark : ' + response)
         user_response = input(user_name + " : ")
 
+        log.append('Mark : ' + response)
+        log.append(user_name + ' : ' + user_response)
+
         if current_state == "state_3":
             break
         
@@ -187,6 +211,10 @@ def normal_chatbot(current_topic, user_name, current_state='state_0'):
     response = input(user_name + " : ")
     context.append(diverging_sentence)
     context.append(response)
+
+    log.append('Mark : ' + diverging_sentence)
+    log.append(user_name + ' : ' + response)
+
     turn += 1
 
     while turn < 7:
@@ -196,8 +224,12 @@ def normal_chatbot(current_topic, user_name, current_state='state_0'):
         context.append(model_response)
         context.append(user_response)
 
+        log.append('Mark : ' + response)
+        log.append(user_name + ' : ' + user_response)
+
     
     print('Mark : Anyways, it was nice to talk to you! I got to go now. See you soon... Bye!!')
+    log.append('Mark : Anyways, it was nice to talk to you! I got to go now. See you soon... Bye!!')
 
 
 if __name__ == "__main__":
@@ -216,11 +248,19 @@ if __name__ == "__main__":
     else:
         user_name = args.name
 
-    # Check the group type
-    if args.group == 0:
-        socratic_chatbot(current_topic, user_name)
-    elif args.group == 1:
-        normal_chatbot(current_topic, user_name)
-    else:
-        print('Please type correct group type!!!')
-    
+    try:
+        # Check the group type
+        if args.group == 0:
+            socratic_chatbot(current_topic, user_name)
+        elif args.group == 1:
+            normal_chatbot(current_topic, user_name)
+        else:
+            print('Please type correct group type!!!')
+
+        # add log
+        with open('log/' + user_name + '_' + str(args.group) + '.json', 'w') as f:
+            json.dump(log, f)
+
+    except KeyboardInterrupt:
+        with open('log/' + user_name + '_' + str(args.group) + '.json', 'w') as f:
+            json.dump(log, f)

@@ -5,17 +5,17 @@
     },
 
     "state_1" : {
-        "Response" : "Cool. I'm good on my side. Did you read about the new restrictive law on cannabis in the US?",
+        "Response" : "Cool. I'm good on my side. Did you read the news about this blind man gaining sight thanks to gene editing?",
         "Next_State" : "state_2"
     },
 
     "state_2" : {
-        "Response" : "If they are serious then they'd have to convict every college student. LOL!!",
+        "Response" : "Well, I guess that in a few years... we'll be able to have Einstein babies on command !! haha",
         "Next_State" : "state_3"
     },
 
     "state_3" : {
-        "Response" : "By the way, are you for or against cannabis legalization?",
+        "Response" : "So, are you for or against gene editing?",
         "Next_State" : { 
             "for" : "state_5",
             "against" : "state_7",
@@ -24,12 +24,12 @@
     },
 
     "state_4" : {
-        "Response" : "Ok. Ya its sometimes tough to make a stand. BTW, I just saw this news about this guy gaining sight thanks to gene editing!!!",
+        "Response" : "Ok. Ya its sometimes tough to make a stand. BTW, I just read about this new restrictive law about cannabis legalization in the US",
         "Next_State" : "change:state_2"
     },
 
     "state_5"  : {
-        "Response" : "If I understood correctly [NAME], you're in favor of weed legalization, is that right",
+        "Response" : "If I understood correctly [NAME], you're in favor of gene editing, is that right ?",
         "Next_State" : { 
             "for" : "state_8",
             "against" : "state_9"
@@ -37,7 +37,7 @@
     },
 
     "state_7"  : {
-        "Response" : "If i understood correctly [NAME], you are against weed legalization, right ?",
+        "Response" : "If i understood correctly [NAME], you are against gene editing, right ?",
         "Next_State" : { 
             "for" : "state_9",
             "against" : "state_10"
@@ -50,7 +50,7 @@
     },
 
     "state_9"  : {
-        "Response" : "Sorry, I misunderstood. Are you for or against weed legalization ?",
+        "Response" : "Sorry, I misunderstood. Are you for or against gene-editing ?",
         "Next_State" : { 
             "for" : "state_8",
             "against" : "state_10"
@@ -63,7 +63,7 @@
     }, 
 
     "state_11"  : {
-        "Response" : "Ok, so you're in favor of legalization because [P], did I get this right ?",
+        "Response" : "Ok, so you're in favor of gene editing because [P], did I get this right ?",
         "Next_State" : { 
             "yes" : "state_15",
             "no" : "state_12"
@@ -81,7 +81,7 @@
     },
 
     "state_14"  : {
-        "Response" : "Ok, so you're against legalization because [P], did I get this right?",
+        "Response" : "Ok, so you're against gene editing because [P], did I get this right?",
         "Next_State" : { 
             "yes" : "state_16",
             "no" : "state_13"
@@ -89,17 +89,17 @@
     },
 
     "state_15"  : {
-        "Response" : "Right... I'm wondering however [NAME], how does it allow you to conclude that weed should be legalized ?",
+        "Response" : "Right... I'm wondering however [NAME], how does [P] allow you to conclude that gene editing should be legal ?",
         "Next_State" : "state_17"
     },
 
     "state_16"  : {
-        "Response" : "Right... I'm wondering however [NAME], how does it allow you to conclude that weed should not be legalized ?",
+        "Response" : "Right... I'm wondering however [NAME], how does it allow you to conclude that gene editing should not be legalized ?",
         "Next_State" : "state_20"
     },
 
     "state_17"  : {
-        "Response" : "Ok, so if I'm not mistaken, [P] allows you to conclude that weed should be legalized because [Q], right ?",
+        "Response" : "Ok, so if I'm not mistaken, it allows you to conclude that gene editing should be legal because [Q], right ?",
         "Next_State" : { 
             "yes" : "state_21",
             "no" : "state_18"
@@ -107,17 +107,17 @@
     },
 
     "state_18"  : {
-        "Response" : "Oh, I'm sorry for misunderstanding. Could you please rephrase what you've explained ? That is, how does it allow you to conclude that weed should be legalized ?",
+        "Response" : "Oh, I'm sorry for misunderstanding. Could you please rephrase what you've explained ? That is, how does it allow you to conclude that gene editing should be legal ?",
         "Next_State" : "state_17"
     },
 
     "state_19"  : {
-        "Response" : "Oh, I'm sorry for misunderstanding. Could you please rephrase what you've explained ? That is, how does it allow you to conclude that weed should not be legalized ?",
+        "Response" : "Oh, I'm sorry for misunderstanding. Could you please rephrase what you've explained ? That is, how does it allow you to conclude that gene editing should not be legal ?",
         "Next_State" : "state_20"
     },
 
     "state_20"  : {
-        "Response" : "Ok, so if I'm not mistaken, [P] allows you to conclude that weed should be legalized because [Q], right ?",
+        "Response" : "Ok, so if I'm not mistaken, [P] allows you to conclude that gene editing should be legal because [Q], right ?",
         "Next_State" : { 
             "yes" : "state_22",
             "no" : "state_19"
@@ -125,7 +125,7 @@
     },
 
     "state_21"  : {
-        "Response" : "Ok, so if I'm not mistaken, [P] allows you to conclude that weed should be legalized because [Q], right ?",
+        "Response" : "Ok, so if I'm not mistaken, [P] allows you to conclude that gene editing should be legal because [Q], right ?",
         "Next_State" : { 
             "yes" : "state_23",
             "no" : "state_24"
@@ -133,7 +133,7 @@
     },
 
     "state_22"  : {
-        "Response" : "Interesting... Could you think of a situation where this would lead you to think that weed should actually be legalized ?",
+        "Response" : "Interesting... Could you think of  a situation where it would lead you to think that gene editing should actually be legal ?",
         "Next_State" : { 
             "yes" : "state_26",
             "no" : "state_25"
@@ -141,7 +141,7 @@
     },
 
     "state_23"  : {
-        "Response" : "I see... Does bringing this example to mind alter your confidence in the belief that weed should be legalized ?",
+        "Response" : "I see... Does bringing this example to mind alter your confidence in the belief that gene editing should be legal ?",
         "Next_State" : { 
             "yes" : "state_29",
             "no" : "state_27"
@@ -165,7 +165,7 @@
     },
 
     "state_26"  : {
-        "Response" : "I see... Does bringing this example to mind alter your confidence that weed should not be legalized ?",
+        "Response" : "I see... Does bringing this example to mind alter your confidence that gene editing should not be legal ?",
         "Next_State" : { 
             "yes" : "state_29",
             "no" : "state_28"
@@ -173,7 +173,7 @@
     },
 
     "state_27"  : {
-        "Response" : "Alright... Would you say there Is another, more fundamental reason why you're in favor of weed legalization ?",
+        "Response" : "Alright... Would you say there Is another, more fundamental reason why you're in favor of gene editing ?",
         "Next_State" : { 
             "yes" : "state_8",
             "no" : "state_29"
@@ -181,7 +181,7 @@
     },
 
     "state_28"  : {
-        "Response" : "Alright... Would you say there Is another, more fundamental reason why you're in favor of weed legalization ?",
+        "Response" : "Alright... Would you say there Is another, more fundamental reason why you're against gene editing ?",
         "Next_State" : { 
             "yes" : "state_10",
             "no" : "state_29"

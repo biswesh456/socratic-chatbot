@@ -5,6 +5,7 @@ import json
 import sys
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForSequenceClassification
 from scipy.special import softmax
+from datetime import datetime
 
 topics_list = ['weed', 'gene']
 log = []
@@ -29,6 +30,7 @@ class opinionClassifier:
         self.tokenizer = AutoTokenizer.from_pretrained("finiteautomata/bertweet-base-sentiment-analysis")
 
     def get_opinion(self, user_query):
+        user_query = user_query.lower()
         if "not sure" in user_query or "dont know" in user_query or "don't know" in user_query:
             return ["neutral", "against"]
 
@@ -45,6 +47,8 @@ class opinionClassifier:
             if results[0] > 0.25:
                 return ["neutral", "against"]
             else:
+                if 'for' in user_query:
+                    return ["for"]
                 return ["neutral", "for"]
 
     def yes_no_detector(self, user_query):
@@ -128,12 +132,15 @@ def socratic_chatbot(current_topic, user_name, current_state='state_0'):
         reason_p, reason_q, response = detect_reason(response, user_response, reason_p, reason_q)
 
         time.sleep(len(response.split())*0.2)
-
+        
+        now = datetime.now()
+        start_time = now.strftime("%H:%M:%S")
         print('Mark : ' + response)
         user_response = input(user_name + " : ")
+        now = datetime.now()
+        stop_time = now.strftime("%H:%M:%S")
 
-        log.append('Mark : ' + response)
-        log.append(user_name + ' : ' + user_response)
+        log.append(['Mark : ' + response, user_name + ' : ' + user_response, str(start_time), str(stop_time)])
 
         if 'Next_State' in state:
             next_state = state['Next_State']
@@ -194,11 +201,14 @@ def normal_chatbot(current_topic, user_name, current_state='state_0'):
         state = fsm[current_state]
         response = state['Response'].replace("[NAME]", user_name)
         time.sleep(len(response.split())*0.2)
+
+        now = datetime.now()
+        start_time = now.strftime("%H:%M:%S")
         print('Mark : ' + response)
         user_response = input(user_name + " : ")
-
-        log.append('Mark : ' + response)
-        log.append(user_name + ' : ' + user_response)
+        now = datetime.now()
+        stop_time = now.strftime("%H:%M:%S")
+        log.append(['Mark : ' + response, user_name + ' : ' + user_response, str(start_time), str(stop_time)])
 
         if current_state == "state_3":
             break
@@ -207,25 +217,33 @@ def normal_chatbot(current_topic, user_name, current_state='state_0'):
 
     # response to move away from topic
     diverging_sentence = fsm['state_diverging_statement']["Response"]
+    now = datetime.now()
+    start_time = now.strftime("%H:%M:%S")
     print('Mark : ' + diverging_sentence)
     response = input(user_name + " : ")
+    now = datetime.now()
+    stop_time = now.strftime("%H:%M:%S")
+
     context.append(diverging_sentence)
     context.append(response)
 
-    log.append('Mark : ' + diverging_sentence)
-    log.append(user_name + ' : ' + response)
+    log.append(['Mark : ' + diverging_sentence, user_name + ' : ' + response, str(start_time), str(stop_time)])
 
     turn += 1
 
     while turn < 7:
         model_response = blender_bot.get_response(" ".join(context))
+        now = datetime.now()
+        start_time = now.strftime("%H:%M:%S")
         print('Mark : ' + model_response)
         user_response = input(user_name + " : ")
+        now = datetime.now()
+        stop_time = now.strftime("%H:%M:%S")
+
         context.append(model_response)
         context.append(user_response)
 
-        log.append('Mark : ' + response)
-        log.append(user_name + ' : ' + user_response)
+        log.append(['Mark : ' + response, user_name + ' : ' + user_response, str(start_time), str(stop_time)])
 
     
     print('Mark : Anyways, it was nice to talk to you! I got to go now. See you soon... Bye!!')

@@ -31,8 +31,16 @@ class opinionClassifier:
 
     def get_opinion(self, user_query):
         user_query = user_query.lower()
+        user_query = user_query.replace('favour', 'for')
+
         if "not sure" in user_query or "dont know" in user_query or "don't know" in user_query:
             return ["neutral", "against"]
+
+        if "not against" in user_query or "not in against" in user_query or "not in the against" in user_query:
+            return ["for"]
+
+        if "not for" in user_query or "not in for" in user_query or "not in the for" in user_query:
+            return ["against"]
 
         inputs = self.tokenizer([user_query], return_tensors='pt')
         output = self.model(**inputs)
@@ -52,12 +60,18 @@ class opinionClassifier:
                 return ["neutral", "for"]
 
     def yes_no_detector(self, user_query):
-        if any(x in ["no", "nope", "not", "don't"] for x in user_query.split()):
+        user_query = user_query.lower()
+        if any(x in ["no ", "nope", "not ", "don't"] for x in user_query.split()):
             return "no"
         else:
             return "yes"
 
 def detect_reason(response, prev_user_response, p, q):
+    prev_user_response = prev_user_response.replace('I ', 'you ')
+    prev_user_response = prev_user_response.replace(' am ', ' are ')
+    prev_user_response = prev_user_response.replace(' was ', ' were ')
+    prev_user_response = prev_user_response.lower()
+    
     if '[P]' in response and '[Q]' not in response:
         if 'because' in prev_user_response:
             p = prev_user_response.split('because')[-1]

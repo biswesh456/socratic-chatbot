@@ -42,6 +42,12 @@ class opinionClassifier:
         if "not for" in user_query or "not in for" in user_query or "not in the for" in user_query:
             return ["against"]
 
+        if "against" in user_query :
+            return ["against"]
+        
+        if "for" in user_query :
+            return ["for"]
+
         inputs = self.tokenizer([user_query], return_tensors='pt')
         output = self.model(**inputs)
         results = softmax(output[0][0].detach().numpy())
@@ -62,6 +68,8 @@ class opinionClassifier:
     def yes_no_detector(self, user_query):
         user_query = user_query.lower()
         if any(x in ["no ", "nope", "not ", "don't"] for x in user_query.split()):
+            return "no"
+        elif user_query == 'no' or user_query == 'nope' or user_query == 'not':
             return "no"
         else:
             return "yes"

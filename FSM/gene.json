@@ -31,16 +31,16 @@
     "state_5"  : {
         "Response" : "If I understood correctly [NAME], you're in favor of gene editing, is that right ?",
         "Next_State" : { 
-            "for" : "state_8",
-            "against" : "state_9"
+            "yes" : "state_8",
+            "no" : "state_9"
         }
     },
 
     "state_7"  : {
         "Response" : "If i understood correctly [NAME], you are against gene editing, right ?",
         "Next_State" : { 
-            "for" : "state_9",
-            "against" : "state_10"
+            "no" : "state_9",
+            "yes" : "state_10"
         }
     } ,
 
@@ -58,7 +58,7 @@
     }, 
     
     "state_10"  : {
-        "Response" : "Right. What would you say is the main reason why you're against it ?",
+        "Response" : "Right. what would you say is the main reason why you're against it ?",
         "Next_State" : "state_14"
     }, 
 
@@ -125,7 +125,7 @@
     },
 
     "state_21"  : {
-        "Response" : "Interesting... Could you think of a situation where [Q] would lead you to think that gene editing should not be legal ?",
+        "Response" : "Ok, so if I'm not mistaken, [P] allows you to conclude that gene editing should be legal because [Q], right ?",
         "Next_State" : { 
             "yes" : "state_23",
             "no" : "state_24"
@@ -133,7 +133,7 @@
     },
 
     "state_22"  : {
-        "Response" : "Interesting... Could you think of  a situation where [Q] would lead you to think that gene editing should actually be legal ?",
+        "Response" : "Interesting... Could you think of  a situation where it would lead you to think that gene editing should actually be legal ?",
         "Next_State" : { 
             "yes" : "state_26",
             "no" : "state_25"
@@ -173,7 +173,7 @@
     },
 
     "state_27"  : {
-        "Response" : "Alright... Would you say there is another, more fundamental reason why you're in favor of gene editing ?",
+        "Response" : "Alright... Would you say there Is another, more fundamental reason why you're in favor of gene editing ?",
         "Next_State" : { 
             "yes" : "state_8",
             "no" : "state_29"

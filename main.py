@@ -298,9 +298,9 @@ if __name__ == "__main__":
             print('Please type correct group type!!!')
 
         # add log
-        with open('log/' + user_name + '_' + str(args.group) + '.json', 'w') as f:
+        with open('./log/' + user_name + '_' + str(args.group) + '.json', 'w') as f:
             json.dump(log, f)
 
     except KeyboardInterrupt:
-        with open('log/' + user_name + '_' + str(args.group) + '.json', 'w') as f:
+        with open('./log/' + user_name + '_' + str(args.group) + '.json', 'w') as f:
             json.dump(log, f)

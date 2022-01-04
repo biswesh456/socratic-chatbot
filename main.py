@@ -67,7 +67,7 @@ class opinionClassifier:
 
     def yes_no_detector(self, user_query):
         user_query = user_query.lower()
-        if any(x in ["no ", "nope", "not ", "don't"] for x in user_query.split()):
+        if any(x in ["no", "nope", "not", "don't", "can't", 'cannot'] for x in user_query.split()):
             return "no"
         elif user_query == 'no' or user_query == 'nope' or user_query == 'not':
             return "no"
@@ -76,9 +76,14 @@ class opinionClassifier:
 
 def detect_reason(response, prev_user_response, p, q):
     prev_user_response = prev_user_response.replace('I ', 'you ')
+    prev_user_response = prev_user_response.replace("I'm ", 'you are ')
+    prev_user_response = prev_user_response.lower()
+    prev_user_response = prev_user_response.replace("my", 'your')
+    prev_user_response = prev_user_response.replace("mine", 'your')
+    prev_user_response = prev_user_response.replace(" me ", ' you ')
     prev_user_response = prev_user_response.replace(' am ', ' are ')
     prev_user_response = prev_user_response.replace(' was ', ' were ')
-    prev_user_response = prev_user_response.lower()
+    
     
     if '[P]' in response and '[Q]' not in response:
         if 'because' in prev_user_response:
@@ -100,7 +105,18 @@ def detect_reason(response, prev_user_response, p, q):
             p = prev_user_response.split('that')[-1]
             p = p.replace('!', '').replace('?', '')
             return p, '', response.replace('[P]', p).strip() 
+        elif 'meant' in prev_user_response:
+            p = prev_user_response.split('meant')[-1]
+            p = p.replace('!', '').replace('?', '')
+            return p, '', response.replace('[P]', p).strip() 
+        elif 'mean' in prev_user_response:
+            p = prev_user_response.split('mean')[-1]
+            p = p.replace('!', '').replace('?', '')
+            return p, '', response.replace('[P]', p).strip() 
         else:
+            if p != '':
+                return p, '', response.replace('[P]', p).strip() 
+            
             p = prev_user_response
             p = p.replace('!', '').replace('?', '')
             return p, '', response.replace('[P]', p).strip() 
@@ -278,7 +294,7 @@ if __name__ == "__main__":
     parser.add_argument('--name', type=str, default='', help='get name of the participant')
     args = parser.parse_args()
     
-    topic_idx = random.randint(0, len(topics_list)-1)
+    topic_idx = 1
     current_topic = topics_list.pop(topic_idx)
 
     # Check name of the participant

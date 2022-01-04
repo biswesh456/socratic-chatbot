@@ -89,12 +89,12 @@
     },
 
     "state_15"  : {
-        "Response" : "Right... I'm wondering however [NAME], how does [P] allow you to conclude that gene editing should be legal ?",
-        "Next_State" : "state_17"
+        "Response" : "Right... I'm wondering however [NAME], how does it allow you to conclude that gene editing should be legal ?",
+        "Next_State" : "state_21"
     },
 
     "state_16"  : {
-        "Response" : "Right... I'm wondering however [NAME], how does it allow you to conclude that gene editing should not be legalized ?",
+        "Response" : "Right... I'm wondering however [NAME], how does it allow you to conclude that gene editing should not be legal ?",
         "Next_State" : "state_20"
     },
 
@@ -117,7 +117,7 @@
     },
 
     "state_20"  : {
-        "Response" : "Ok, so if I'm not mistaken, [P] allows you to conclude that gene editing should be legal because [Q], right ?",
+        "Response" : "Ok, so if I'm not mistaken, [P] allows you to conclude that gene editing should be illegal because [Q], right ?",
         "Next_State" : { 
             "yes" : "state_22",
             "no" : "state_19"
@@ -125,7 +125,7 @@
     },
 
     "state_21"  : {
-        "Response" : "Ok, so if I'm not mistaken, [P] allows you to conclude that gene editing should be legal because [Q], right ?",
+        "Response" : "Interesting... Could you think of a situation where [Q] would lead you to think that gene editing should not be legal ?",
         "Next_State" : { 
             "yes" : "state_23",
             "no" : "state_24"

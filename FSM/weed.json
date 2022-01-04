@@ -117,7 +117,7 @@
     },
 
     "state_20"  : {
-        "Response" : "Ok, so if I'm not mistaken, [P] allows you to conclude that weed should be legalized because [Q], right ?",
+        "Response" : "Ok, so if I'm not mistaken, [P] allows you to conclude that weed should be illegal because [Q], right ?",
         "Next_State" : { 
             "yes" : "state_22",
             "no" : "state_19"
@@ -125,7 +125,7 @@
     },
 
     "state_21"  : {
-        "Response" : "Ok, so if I'm not mistaken, [P] allows you to conclude that weed should be legalized because [Q], right ?",
+        "Response" : "Interesting... Could you think of a situation where [Q] would lead you to think that drugs should not be legalized ?",
         "Next_State" : { 
             "yes" : "state_23",
             "no" : "state_24"

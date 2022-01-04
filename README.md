@@ -2,9 +2,18 @@
 
 Clone the repository. 
 
-Install transformers and pytorch library in the local environment.
+Install transformers and pytorch library in the local environment using the following commands
 
-Create a log folder in the root directory.
+```
+pip install transformers
+pip install torch
+```
+
+Create a log folder in the root directory using the following command
+
+```
+mkdir log
+```
 
 Run the following command to start the chatbot - 
 
